@@ -15,8 +15,8 @@ class UploadForm extends Model
     public function rules()
     {
         return [
-            ['email','email','message'=>'suka blyat idi na huy'],
-            [['imageFiles'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'maxFiles' => 4,'checkExtensionByMimeType'=>false],
+            ['email','email','message'=>'test'],
+            [['imageFiles'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'maxFiles' => 5,'checkExtensionByMimeType'=>false],
         ];
     }
      
