@@ -7,13 +7,14 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
-use app\models\EntryForm;
+#use app\models\EntryForm;
 use yii\web\upload;
-use app\models\MyForm;
+#use app\models\MyForm;
 use app\models\UploadForm;
 use yii\web\UploadedFile;
+
+
+
 
 
 class SiteController extends Controller
@@ -73,96 +74,9 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
-
-    /**
-     * Login action.
-     *
-     * @return Response|string
-     */
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-
-        $model->password = '';
-        return $this->render('login', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Logout action.
-     *
-     * @return Response
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
-
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('contact');
-        
-        
-    }
-    public function actionSay($message = 'Hello') {
-        return $this->render('say', ['message' => $message]);
-    }
-    
-    public function actionTest($message = 'Hello') {
-        return $this->render('test', ['message' => $message]);
-    }
-    
+  
     
      
-    
-     public function actionEntry() {
-        # use app\models\EntryForm;
-        $model = new EntryForm();
-
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            // данные в $model удачно проверены
-            // делаем что-то полезное с $model ...
-
-            return $this->render('entry-confirm', ['model' => $model]);
-        } else {
-            // либо страница отображается первый раз, либо есть ошибка в данных
-            return $this->render('entry', ['model' => $model]);
-        }
-    }
-   
     
     
     public function actionUpload()
@@ -190,3 +104,4 @@ class SiteController extends Controller
        return $this->render('image');
     }
 }
+
